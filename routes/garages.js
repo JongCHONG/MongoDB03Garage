@@ -8,13 +8,14 @@ app.get('/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    const garage = await Garage.findOne({ _id: id })
+    const garage = await Garage.findOne({ _id: id }).lean()
     const cars = await Car.find({ garage_id: garage._id })
 
     const garageCars = {
-      ...garage._doc,
+      ...garage,
       cars
     }
+    //populate à regarder dans la correction
 
     res.json(garageCars)
   } catch (err) {
