@@ -55,4 +55,15 @@ app.post('/', async (req, res) => {
   })
 })
 
+app.delete('/:id', async (req, res) => {
+  const { id } = req.params
+
+  try {
+    await Car.deleteOne({ _id: id }).exec()
+    res.status(200).json({ success: "Car deleted" })
+  } catch(err) {
+    res.status(500).json({ error: err })
+  }
+})
+
 module.exports = app
