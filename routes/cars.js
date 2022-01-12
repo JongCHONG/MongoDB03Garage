@@ -42,16 +42,16 @@ app.put('/:id', async (req, res) => {
 })
 
 app.post('/', async (req, res) => {
-  const car = new Car({
+  const newCar = new Car({
     ...req.body
   })
-  car.save((err, car) => {
+  newCar.save((err, newCar) => {
     if (err) {
       res.status(500).json({ error: err })
       return
     }
 
-    res.json(car)
+    res.json(newCar)
   })
 })
 
