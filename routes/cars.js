@@ -17,7 +17,7 @@ app.get('/:id', async (req, res) => {
   const { id } = req.params
 
   try {
-    const car = await Car.findOne({ id: id })
+    const car = await Car.findOne({ _id: id })
 
     res.json(car)
   } catch (err) {
@@ -30,10 +30,10 @@ app.put('/:id', async (req, res) => {
 
   try {
     const car = await Car.findOneAndUpdate(
-      { id: id }, 
+      { _id: id }, 
       { $set: { ...req.body } },
       { new: true }
-    )
+    ).exec()
 
     res.json(car)
   } catch (err) {
