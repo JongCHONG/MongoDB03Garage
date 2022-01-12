@@ -25,6 +25,22 @@ app.get('/:id', async (req, res) => {
   }
 })
 
+app.put('/:id', async (req, res) => {
+  const { id } = req.params
+
+  try {
+    const car = await Car.findOneAndUpdate(
+      { id: id }, 
+      { $set: { ...req.body } },
+      { new: true }
+    )
+
+    res.json(car)
+  } catch (err) {
+    res.status(500).json({ error: err })
+  }
+})
+
 app.post('/', async (req, res) => {
   const car = new Car({
     ...req.body
